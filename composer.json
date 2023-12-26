@@ -1,0 +1,7 @@
+{
+    "name": "capsulescodes/fixers",
+    "description": "Capsules Codes Package",
+    "type": "library",
+    "require": { "friendsofphp/php-cs-fixer": "^3.41" },
+    "autoload": { "psr-4" : { "CapsulesCodes\\Fixers\\" : "src/" } }
+}
