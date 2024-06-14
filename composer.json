@@ -1,7 +1,9 @@
 {
-    "name": "capsulescodes/fixers",
-    "description": "Capsules Codes Package",
-    "type": "library",
-    "require": { "friendsofphp/php-cs-fixer": "^3.41" },
-    "autoload": { "psr-4" : { "CapsulesCodes\\Fixers\\" : "src/" } }
+    "name" : "capsulescodes/fixers",
+    "description" : "Capsules Codes Custom Fixers for PHP",
+    "type" : "library",
+    "require-dev" : { "friendsofphp/php-cs-fixer" : "^3.58.1", "pestphp/pest" : "^2.34", "symfony/var-dumper" : "^7.1" },
+    "autoload" : { "psr-4" : { "CapsulesCodes\\Fixers\\" : "src/" } },
+    "autoload-dev" : { "psr-4" : { "CapsulesCodes\\Fixers\\Tests\\" : "tests/" } },
+    "config": { "allow-plugins": { "pestphp/pest-plugin": true } }
 }

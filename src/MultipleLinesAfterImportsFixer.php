@@ -6,21 +6,25 @@ declare( strict_types = 1 );
 namespace CapsulesCodes\Fixers;
 
 use PhpCsFixer\AbstractFixer;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\Tokenizer\Tokens;
-use SplFileInfo;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
+use SplFileInfo;
 use InvalidArgumentException;
 
 
-final class DoubleLinesAfterImportsFixer extends AbstractFixer implements WhitespacesAwareFixerInterface
+final class MultipleLinesAfterImportsFixer extends AbstractFixer implements ConfigurableFixerInterface, WhitespacesAwareFixerInterface
 {
     public function getName() : string
     {
-        return 'CapsulesCodes/double_lines_after_imports';
+        return 'CapsulesCodes/multiple_lines_after_imports';
     }
 
     public function getDefinition() : FixerDefinitionInterface
@@ -31,6 +35,13 @@ final class DoubleLinesAfterImportsFixer extends AbstractFixer implements Whites
     public function getPriority() : int
     {
         return -11;
+    }
+
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    {
+        return new FixerConfigurationResolver( [
+            ( new FixerOptionBuilder( 'lines', 'Set the {number} blank lines after the use statements block' ) )->setAllowedTypes( [ 'integer' ] )->setDefault( 2 )->getOption()
+        ] );
     }
 
     public function isCandidate( Tokens $tokens ) : bool
@@ -62,6 +73,7 @@ final class DoubleLinesAfterImportsFixer extends AbstractFixer implements Whites
             }
 
             $semicolonIndex = $tokens->getNextTokenOfKind( $index, [ ';', [ T_CLOSE_TAG ] ] );
+
             $insertIndex = $semicolonIndex;
 
             if( $tokens[ $semicolonIndex ]->isGivenKind( T_CLOSE_TAG ) )
@@ -75,13 +87,13 @@ final class DoubleLinesAfterImportsFixer extends AbstractFixer implements Whites
 
             if( $semicolonIndex === count( $tokens ) - 1 )
             {
-                $tokens->insertAt( $insertIndex + 1, new Token( [ T_WHITESPACE, $ending.$ending.$indent ] ) );
+                $tokens->insertAt( $insertIndex + 1, new Token( [ T_WHITESPACE, str_repeat( $ending, $this->configuration[ 'lines' ] ).$indent ] ) );
 
                 ++$added;
             }
             else
             {
-                $newline = $ending.$ending;
+                $newline = str_repeat( $ending, $this->configuration[ 'lines' ] );
 
                 $tokens[ $semicolonIndex ]->isGivenKind( T_CLOSE_TAG ) ? --$insertIndex : ++$insertIndex;
 
