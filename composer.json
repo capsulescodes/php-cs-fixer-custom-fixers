@@ -1,8 +1,11 @@
 {
-    "name" : "capsulescodes/fixers",
-    "description" : "Capsules Codes Custom Fixers for PHP",
+    "name" : "capsulescodes/php-cs-fixer-custom-fixers",
+    "description" : "Capsules Codes set of custom fixers for PHP CS Fixer",
+    "license": "MIT",
     "type" : "library",
-    "require-dev" : { "friendsofphp/php-cs-fixer" : "^3.58.1", "pestphp/pest" : "^2.34", "symfony/var-dumper" : "^7.1" },
+    "authors" : [ { "name" : "Yannick Decat", "email" : "yannick@capsules.codes", "homepage" : "https://capsules.codes" } ],
+    "require" : { "php" : "^8.2", "friendsofphp/php-cs-fixer" : "^3.59.3" },
+    "require-dev" : { "pestphp/pest" : "^2.34.8", "symfony/var-dumper" : "^7.1.1" },
     "autoload" : { "psr-4" : { "CapsulesCodes\\Fixers\\" : "src/" } },
     "autoload-dev" : { "psr-4" : { "CapsulesCodes\\Fixers\\Tests\\" : "tests/" } },
     "config": { "allow-plugins": { "pestphp/pest-plugin": true } }
