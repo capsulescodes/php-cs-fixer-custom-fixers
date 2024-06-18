@@ -7,6 +7,7 @@ namespace CapsulesCodes\Fixers;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerTrait;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -21,6 +22,9 @@ use PhpCsFixer\Preg;
 
 final class MethodChainingIndentationFixer extends AbstractFixer implements ConfigurableFixerInterface, WhitespacesAwareFixerInterface
 {
+    use ConfigurableFixerTrait;
+
+
     public function getName() : string
     {
         return 'CapsulesCodes/method_chaining_indentation';
@@ -39,8 +43,10 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Conf
     protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver( [
+
             ( new FixerOptionBuilder( 'single-line', 'Set chains on single line' ) )->setAllowedTypes( [ 'bool' ] )->setDefault( false )->getOption(),
             ( new FixerOptionBuilder( 'multi-line', 'Set chains on next line if {number} chains' ) )->setAllowedTypes( [ 'integer' ] )->setDefault( 4 )->getOption()
+
         ] );
     }
 

@@ -7,6 +7,7 @@ namespace CapsulesCodes\Fixers;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerTrait;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
@@ -20,6 +21,9 @@ use SplFileInfo;
 
 final class SpacesInsideSquareBracesFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
+    use ConfigurableFixerTrait;
+
+
     public function getName() : string
     {
         return 'CapsulesCodes/spaces_inside_square_braces';
@@ -39,10 +43,7 @@ final class SpacesInsideSquareBracesFixer extends AbstractFixer implements Confi
     {
         return new FixerConfigurationResolver( [
 
-            ( new FixerOptionBuilder( 'space', 'Whether to have `single` or `none` space inside parentheses.' ) )
-                ->setAllowedValues( [ 'none', 'single' ] )
-                ->setDefault( 'none' )
-                ->getOption()
+            ( new FixerOptionBuilder( 'space', 'Set space inside parentheses.' ) )->setAllowedValues( [ 'none', 'single' ] )->setDefault( 'none' )->getOption()
 
         ] );
     }

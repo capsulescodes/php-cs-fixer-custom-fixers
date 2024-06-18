@@ -7,6 +7,7 @@ namespace CapsulesCodes\Fixers;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerTrait;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -22,6 +23,9 @@ use InvalidArgumentException;
 
 final class MultipleLinesAfterImportsFixer extends AbstractFixer implements ConfigurableFixerInterface, WhitespacesAwareFixerInterface
 {
+    use ConfigurableFixerTrait;
+
+
     public function getName() : string
     {
         return 'CapsulesCodes/multiple_lines_after_imports';
@@ -40,7 +44,9 @@ final class MultipleLinesAfterImportsFixer extends AbstractFixer implements Conf
     protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver( [
-            ( new FixerOptionBuilder( 'lines', 'Set the {number} blank lines after the use statements block' ) )->setAllowedTypes( [ 'integer' ] )->setDefault( 2 )->getOption()
+
+            ( new FixerOptionBuilder( 'lines', 'Set {number} blank lines after the use statements block' ) )->setAllowedTypes( [ 'integer' ] )->setDefault( 2 )->getOption()
+
         ] );
     }
 
