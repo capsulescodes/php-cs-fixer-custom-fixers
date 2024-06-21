@@ -115,9 +115,9 @@ return ( new PhpCsFixer\Config() )
 
 <br>
 
-- Using `flint.json` config file by [ Capsules Codes Flint ](https://github.com/capsulescodes/flint)
+- Using `flint.json` config file by [ Laravel Flint ](https://github.com/capsulescodes/laravel-flint)
 
-```gi
+```
 {
     ...
     "rules" : {
@@ -134,6 +134,19 @@ return ( new PhpCsFixer\Config() )
 
 }
 ```
+
+<br>
+
+> [!IMPORTANT]
+>
+> Composer's Autoloader needs optimize option to detect custom fixers.
+
+```
+...
+"config" : { "optimize-autoloader" : true }
+...
+```
+
 
 <br>
 

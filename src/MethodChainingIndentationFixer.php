@@ -1,6 +1,4 @@
-<?php
-
-declare( strict_types = 1 );
+<?php declare( strict_types = 1 );
 
 
 namespace CapsulesCodes\Fixers;
@@ -70,65 +68,87 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Conf
 
             $chainings = [];
 
-            $end = $index;
+            $parenthesis = 0;
 
             for( $j = $index; $j < $count; ++$j )
             {
-                if( $tokens[ $j ]->getContent() === ';' )
-                {
-                    $end = $j;
+                if( $tokens[ $j ]->getContent() === ';' ) break;
 
-                    break;
-                }
+                if( $tokens[ $j ]->getContent() === '(' ) $parenthesis++;
 
-                if( $tokens[ $j ]->isObjectOperator() ) $chainings[] = $j;
+                if( $tokens[ $j ]->getContent() === ')' ) $parenthesis--;
+
+                if( $parenthesis == 0 && $tokens[ $j ]->isObjectOperator() && $tokens[ $tokens->getPrevMeaningfulToken( $j ) ]->getContent() === ')' ) $chainings[] = $j;
             }
+
 
             if( $this->configuration[ 'single-line' ] )
             {
-                for( $k = 0; $k < count( $chainings ); ++$k )
+                for( $k = count( $chainings ) - 1; $k >= 0; --$k )
                 {
-                    $chaining = array_reverse( $chainings )[ $k ];
+                    $chaining = $chainings[ $k ];
 
-                    if( $tokens[ $chaining - 1 ]->isWhitespace() )
-                    {
-                        $tokens->clearAt( $chaining - 1 );
-                    }
+                    if( $tokens[ $chaining - 1 ]->isWhitespace() ) $tokens->clearAt( $chaining - 1 );
                 }
 
                 continue;
             }
 
+
             if( array_key_exists( 'multi-line', $this->configuration ) )
             {
-                for( $k = 0; $k < count( $chainings ); ++$k )
+                for( $k = count( $chainings ) - 1; $k >= 0; --$k )
                 {
-                    $chaining = array_reverse( $chainings )[ $k ];
-
-                    if( $tokens[ $chaining - 1 ]->isWhitespace() )
-                    {
-                        $tokens->clearAt( $chaining - 1 );
-
-                        --$chaining;
-                    }
+                    $chaining = $chainings[ $k ];
 
                     if( count( $chainings ) >= $this->configuration[ 'multi-line' ] )
                     {
+                        if( $tokens[ $chaining - 1 ]->isWhitespace() ) $tokens->clearAt( $chaining - 1 );
+
                         $expectedIndent = $this->getExpectedIndentAt( $tokens, $chainings[ 0 ] );
 
-                        $line = new Token( [ T_WHITESPACE, $this->whitespacesConfig->getLineEnding().$expectedIndent ] );
+                        $expectedPosition = $this->getExpectedPositionAt( $tokens, $chainings[ 0 ] );
+
+                        $expected = strlen( $expectedPosition ) ? $expectedPosition : $expectedIndent;
+
+                        $line = new Token( [ T_WHITESPACE, $this->whitespacesConfig->getLineEnding() . $expected ] );
 
                         $tokens->insertAt( $chaining, $line );
-
-                        ++$end;
                     }
-
-                    $count = count( $tokens );
                 }
 
-                $index = $end;
+                $count = count( $tokens );
+
+                ++$index;
             }
         }
+    }
+
+    private function getExpectedPositionAt( Tokens $tokens, int $index ) : string
+    {
+        $index = $tokens->getPrevMeaningfulToken( $index );
+
+        $position = 0;
+
+        $found = false;
+
+        for( $l = $index; $l >= 0; --$l )
+        {
+            if( str_contains( $tokens[ $l ]->getContent(), "\n" ) )
+            {
+                $array = explode( "\n", $tokens[ $l ]->getContent() );
+
+                $position += strlen( end( $array ) );
+
+                break;
+            }
+
+            if( $found ) $position += strlen( $tokens[ $l ]->getContent() );
+
+            if( $tokens[ $l ]->isGivenKind( [ ...Token::getObjectOperatorKinds(), T_DOUBLE_COLON ] ) ) $found = true;
+        }
+
+        return str_repeat( " ", $position );
     }
 
     private function getExpectedIndentAt( Tokens $tokens, int $index ) : string
