@@ -1,6 +1,6 @@
 <?php
 
-use CapsulesCodes\Fixers\SpacesInsideSquareBracesFixer;
+use CapsulesCodes\PhpCsFixerCustomFixers\Fixers\SpacesInsideSquareBracesFixer;
 
 
 it( "doesn't add spaces inside square braces", function() : void

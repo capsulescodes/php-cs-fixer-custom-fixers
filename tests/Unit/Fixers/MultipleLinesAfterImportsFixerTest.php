@@ -1,6 +1,6 @@
 <?php
 
-use CapsulesCodes\Fixers\MultipleLinesAfterImportsFixer;
+use CapsulesCodes\PhpCsFixerCustomFixers\Fixers\MultipleLinesAfterImportsFixer;
 
 
 it( "adds multiple lines after imports", function() : void

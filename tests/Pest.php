@@ -1,6 +1,6 @@
 <?php
 
-use CapsulesCodes\Fixers\Tests\TestCase;
+use CapsulesCodes\PhpCsFixerCustomFixers\Tests\TestCase;
 
 
 uses( TestCase::class )->in( 'Unit' );

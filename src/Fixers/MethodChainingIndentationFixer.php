@@ -1,7 +1,7 @@
 <?php declare( strict_types = 1 );
 
 
-namespace CapsulesCodes\Fixers;
+namespace CapsulesCodes\PhpCsFixerCustomFixers\Fixers;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;

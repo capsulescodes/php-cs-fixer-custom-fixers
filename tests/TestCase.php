@@ -1,12 +1,11 @@
 <?php
 
-namespace CapsulesCodes\Fixers\Tests;
+namespace CapsulesCodes\PhpCsFixerCustomFixers\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use PhpCsFixer\Finder;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\RuleSet\RuleSet;
-use PhpCsFixer\Config;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 
@@ -14,6 +13,7 @@ use SplFileInfo;
 abstract class TestCase extends BaseTestCase
 {
     public Finder $finder;
+
 
     protected function setUp() : void
     {

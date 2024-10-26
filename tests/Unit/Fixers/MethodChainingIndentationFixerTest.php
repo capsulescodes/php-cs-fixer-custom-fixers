@@ -1,6 +1,6 @@
 <?php
 
-use CapsulesCodes\Fixers\MethodChainingIndentationFixer;
+use CapsulesCodes\PhpCsFixerCustomFixers\Fixers\MethodChainingIndentationFixer;
 
 
 it( "indents method chainings", function() : void
