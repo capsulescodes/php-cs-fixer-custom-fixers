@@ -91,11 +91,16 @@ use PhpCsFixer\Config;
 return ( new PhpCsFixer\Config() )
     ...
     ->registerCustomFixers( [
+        ...
+        new \CapsulesCodes\PhpCsFixerCustomFixers\Fixers()
+        ...
+
+        or
 
         ...
-        new \CapsulesCodes\Fixers\MethodChainingIndentationFixer(),
-        new \CapsulesCodes\Fixers\MultipleLinesAfterImportsFixer(),
-        new \CapsulesCodes\Fixers\SpacesInsideSquareBracesFixer()
+        new \CapsulesCodes\PhpCsFixerCustomFixers\MethodChainingIndentationFixer(),
+        new \CapsulesCodes\PhpCsFixerCustomFixers\MultipleLinesAfterImportsFixer(),
+        new \CapsulesCodes\PhpCsFixerCustomFixers\SpacesInsideSquareBracesFixer()
         ...
 
     ] )
@@ -113,57 +118,18 @@ return ( new PhpCsFixer\Config() )
 
 <br>
 
-<br>
-
-- Using `flint.json` config file by [ Laravel Flint ](https://github.com/capsulescodes/laravel-flint)
-
-```
-{
-    ...
-    "rules" : {
-
-        ...
-        "CapsulesCodes/method_chaining_indentation" : { "multi-line" : 4 },
-        "CapsulesCodes/multiple_lines_after_imports" : { "lines" : 2 },
-        "CapsulesCodes/spaces_inside_square_braces" : { "space" : "single" }
-        ...
-
-    },
-    "fixers" : [ "CapsulesCodes\\Fixers" ]
-    ...
-
-}
-```
-
-<br>
-
-> [!IMPORTANT]
->
-> Composer's Autoloader needs optimize option to detect custom fixers.
-
-```
-...
-"config" : { "optimize-autoloader" : true }
-...
-```
-
-
-<br>
-
 ---
 
 <br>
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 Please make sure to update tests as appropriate.
 
 ## Credits
 
-- [Capsules Codes](https://github.com/capsulescodes)
+[Capsules Codes](https://github.com/capsulescodes)
 
 ## License
 
