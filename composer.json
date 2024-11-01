@@ -4,8 +4,8 @@
     "license": "MIT",
     "type" : "library",
     "authors" : [ { "name" : "Yannick Decat", "email" : "yannick@capsules.codes", "homepage" : "https://capsules.codes" } ],
-    "require" : { "php" : "^8.0", "friendsofphp/php-cs-fixer" : "^3.64.0" },
-    "require-dev" : { "pestphp/pest" : "^3.2.5", "symfony/var-dumper" : "^7.1.5" },
+    "require" : { "php" : "^8.0.0", "friendsofphp/php-cs-fixer" : "^3.64.0" },
+    "require-dev" : { "pestphp/pest" : "^3.5.1", "symfony/var-dumper" : "^7.1.6" },
     "autoload" : { "psr-4" : { "CapsulesCodes\\PhpCsFixerCustomFixers\\" : "src/" } },
     "autoload-dev" : { "psr-4" : { "CapsulesCodes\\PhpCsFixerCustomFixers\\Tests\\" : "tests/" } },
     "config": { "allow-plugins": { "pestphp/pest-plugin": true } }
