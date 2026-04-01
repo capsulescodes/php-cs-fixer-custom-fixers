@@ -5,7 +5,7 @@
     "type" : "library",
     "authors" : [ { "name" : "Yannick Decat", "email" : "yannick@capsules.codes", "homepage" : "https://capsules.codes" } ],
     "require" : { "php" : "^8.3.0", "friendsofphp/php-cs-fixer" : "^3.94.2" },
-    "require-dev" : { "pestphp/pest" : "^4.4.1", "symfony/var-dumper" : "^8.0.6" },
+    "require-dev" : { "pestphp/pest" : "^4.4.3", "symfony/var-dumper" : "^8.0.8" },
     "autoload" : { "psr-4" : { "CapsulesCodes\\PhpCsFixerCustomFixers\\" : "src/" } },
     "autoload-dev" : { "psr-4" : { "CapsulesCodes\\PhpCsFixerCustomFixers\\Tests\\" : "tests/" } },
     "config": { "allow-plugins": { "pestphp/pest-plugin": true } },
