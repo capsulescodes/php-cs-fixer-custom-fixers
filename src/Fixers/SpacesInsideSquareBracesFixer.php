@@ -48,7 +48,7 @@ final class SpacesInsideSquareBracesFixer extends AbstractFixer implements Confi
 
     public function isCandidate( Tokens $tokens ) : bool
     {
-        return $tokens->isAnyTokenKindsFound( [ '[', CT::T_ARRAY_SQUARE_BRACE_OPEN ] );
+        return $tokens->isAnyTokenKindsFound( [ '[', CT::T_ARRAY_SQUARE_BRACE_OPEN, CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN ] );
     }
 
     protected function applyFix( SplFileInfo $file, Tokens $tokens ) : void
@@ -57,7 +57,7 @@ final class SpacesInsideSquareBracesFixer extends AbstractFixer implements Confi
         {
             foreach( $tokens as $index => $token )
             {
-                if( ! $token->equalsAny( [ '[', [ CT::T_ARRAY_SQUARE_BRACE_OPEN ] ] ) ) continue;
+                if( ! $token->equalsAny( [ '[', [ CT::T_ARRAY_SQUARE_BRACE_OPEN ], [ CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN ] ] ) ) continue;
 
                 $prevIndex = $tokens->getPrevMeaningfulToken( $index );
 
@@ -77,7 +77,7 @@ final class SpacesInsideSquareBracesFixer extends AbstractFixer implements Confi
         {
             foreach( $tokens as $index => $token )
             {
-                if( ! $token->equalsAny( ['[', [ CT::T_ARRAY_SQUARE_BRACE_OPEN ] ] ) ) continue;
+                if( ! $token->equalsAny( [ '[', [ CT::T_ARRAY_SQUARE_BRACE_OPEN ], [ CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN ] ] ) ) continue;
 
                 $blockType = Tokens::detectBlockType( $tokens[ $index ] );
 

@@ -9,3 +9,7 @@ $foo = [];
 
 
 $foo = [   "bar", "baz","qux"];
+
+
+
+[$bar, $baz] = [1, 2];
